@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 const List<String> weapons = [
   '大剣',
@@ -99,7 +98,7 @@ class MyItem extends StatelessWidget {
         child: Center(
           child: Text(
             label,
-            style: GoogleFonts.kosugi(fontSize: 32),
+            style: TextStyle(fontSize: 32, fontFamily: 'Kosugi'),
           ),
         ),
         shadowColor: Colors.blue,
