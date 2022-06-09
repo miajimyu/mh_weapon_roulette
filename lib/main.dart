@@ -20,29 +20,33 @@ const List<String> weapons = [
 ];
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    const String title = 'MH Weapon Roulette';
+
     return MaterialApp(
-      title: 'MH Weapon Roulette',
+      title: title,
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: MyHomePage(title: 'MH Weapon Roulette'),
+      home: const MyHomePage(title: title),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -86,8 +90,8 @@ class MyItem extends StatelessWidget {
   final String label;
 
   const MyItem({
-    @required this.label,
-    Key key,
+    required this.label,
+    Key? key,
   }) : super(key: key);
 
   @override
