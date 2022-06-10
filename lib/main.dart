@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 const List<String> weapons = [
   '大剣',
@@ -19,7 +21,28 @@ const List<String> weapons = [
   'ヘビィボウガン'
 ];
 
-void main() {
+void main() async {
+  if (!kIsWeb) {
+    WidgetsFlutterBinding.ensureInitialized();
+    await windowManager.ensureInitialized();
+
+    // Window Option
+    const _size = Size(380, 410);
+    WindowOptions windowOptions = const WindowOptions(
+      size: _size,
+      // minimumSize: _size,
+      // maximumSize: _size,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      alwaysOnTop: true,
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.setAlignment(Alignment.bottomRight);
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
+
   runApp(const MyApp());
 }
 
@@ -99,13 +122,13 @@ class MyItem extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 10 / 2,
       child: Card(
+        shadowColor: Colors.blue,
         child: Center(
           child: Text(
             label,
-            style: TextStyle(fontSize: 32, fontFamily: 'Kosugi'),
+            style: const TextStyle(fontSize: 32, fontFamily: 'Kosugi'),
           ),
         ),
-        shadowColor: Colors.blue,
       ),
     );
   }
